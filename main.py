@@ -26,6 +26,9 @@ for ran in allranks:
     Rank_list.append(ran.find("a").text)
 print("Your Global Rank :: "+Rank_list[0])
 print("Your Country Rank :: "+Rank_list[1])
-question_solved=soup.find("div",{"class":"content"})
-solve_list=question_solved.find("article")
-print(solve_list.text)
+question_solved=soup.find("section",{"class":"rating-data-section problems-solved"})
+solved_list=question_solved.find("span")
+lists_are=solved_list.findAll("a");
+print(" Practice Problems solved are ::  ")
+for problems in lists_are:
+    print(problems.text)
