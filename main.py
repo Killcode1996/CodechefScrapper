@@ -28,10 +28,15 @@ try:
     print("Your Global Rank :: "+Rank_list[0])
     print("Your Country Rank :: "+Rank_list[1])
     question_solved=soup.find("section",{"class":"rating-data-section problems-solved"})
+    contest_Attended_List=question_solved.findAll("p")
+    cnt=1
+    for items in contest_Attended_List:
+        cnt=cnt+1
     solved_list=question_solved.find("span")
     lists_are=solved_list.findAll("a");
     print("Practice Problems solved are ::  ")
     for problems in lists_are:
         print(problems.text)
+    print("Number of contest paricipated :: ",cnt)
 except:
     print("Invalid Handle :( ")
