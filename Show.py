@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import (QWidget,QApplication,QVBoxLayout,QPushButton,QLineEdit,QLabel,QHBoxLayout)
-import main
+import scrapper
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -12,6 +12,7 @@ class MainWindow(QWidget):
         self.name_input = QLineEdit()
         self.button = QPushButton("Search")
         self.button.clicked.connect(self.clickedButton)
+
         h = QHBoxLayout()
         h.addWidget(self.label)
         h.addWidget(self.name_input)
@@ -25,9 +26,14 @@ class MainWindow(QWidget):
         self.show()
 
     def clickedButton(self):
-        print("bv")
-        print(main.cnt)
-        self.button.setText("your Rank is "+str(main.res))
+        print("Entered")
+        handle = self.name_input.text();
+        print(handle)
+        s=scrapper.Scrapper(handle)
+        cnt=(s.ruu())
+        self.button.setText(cnt)
+       # print(main.cnt)
+        #self.button.setText("your Rank is "+str(main.res))
 
 
 
