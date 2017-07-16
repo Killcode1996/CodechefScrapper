@@ -71,4 +71,3 @@ class Scrapper:
             for problems in self.lists_are:
                 list.append(problems.text)
             return list
-

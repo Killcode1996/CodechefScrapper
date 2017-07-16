@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import (QWidget,QApplication,QVBoxLayout,QPushButton,QLineEdit,QLabel,QHBoxLayout,QComboBox)
+from  PyQt5.QtCore import Qt
 import scrapper
 
 class MainWindow(QWidget):
@@ -17,7 +18,13 @@ class MainWindow(QWidget):
         self.ratingStars = QLabel("Rating Stars :: ")
         self.highestRating = QLabel("Highest Rating :: ")
         self.contestAttended = QLabel("Contest Attended :: ")
+        self.cb= QComboBox()
         self.button.clicked.connect(self.clickedButton)
+        #self.pb= QProgressBar(splash)
+        self.setAutoFillBackground(True)
+        p = self.palette()
+        p.setColor(self.backgroundRole(), Qt.lightGray)
+        self.setPalette(p)
         h = QHBoxLayout()
         h.addWidget(self.label)
         h.addWidget(self.name_input)
@@ -30,6 +37,7 @@ class MainWindow(QWidget):
         v.addWidget(self.ratingStars)
         v.addWidget(self.highestRating)
         v.addWidget(self.contestAttended)
+        v.addWidget(self.cb)
         v.addLayout(h)
         v.addWidget(self.button)
         self.setLayout(v)
@@ -42,6 +50,9 @@ class MainWindow(QWidget):
         print(handle)
         try:
             s=scrapper.Scrapper(handle)
+            list=s.problemsolved()
+            for items in list:
+                self.cb.addItem(items)
             self.rating.setText("Codechef Rating ::   "+s.overAllRating())
             self.countryRank.setText("Country Rank ::  "+s.countryRank())
             self.globalRank.setText("Global Rank ::   "+s.globalRank())
