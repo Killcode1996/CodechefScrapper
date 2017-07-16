@@ -43,8 +43,6 @@ class MainWindow(QWidget):
         print(handle)
         try:
             s=scrapper.Scrapper(handle)
-            cnt=(s.overAllRating())
-            self.button.setText(cnt)
             self.rating.setText("Codechef Rating ::   "+s.overAllRating())
             self.countryRank.setText("Country Rank ::  "+s.countryRank())
             self.globalRank.setText("Global Rank ::   "+s.globalRank())
@@ -52,7 +50,14 @@ class MainWindow(QWidget):
             self.highestRating.setText("Highest Rating ::   "+s.highestRating())
             self.contestAttended.setText("Contest Attended ::   "+str(s.contestAttended()))
         except:
+            pri="NULL"
             self.button.setText(":( Invalid Input")
+            self.rating.setText("Codechef Rating ::   " +pri)
+            self.countryRank.setText("Country Rank ::  " + pri)
+            self.globalRank.setText("Global Rank ::   " + pri)
+            self.ratingStars.setText("Rating Stars ::   " + pri)
+            self.highestRating.setText("Highest Rating ::   " + pri)
+            self.contestAttended.setText("Contest Attended ::   " + pri)
        # print(main.cnt)
         #self.button.setText("your Rank is "+str(main.res))
 
