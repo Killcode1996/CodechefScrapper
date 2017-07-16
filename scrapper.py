@@ -29,6 +29,7 @@ class Scrapper:
 
      def overAllRating(self):
          res=self.rating.text
+         print(res)
          return res
 
      def countryRank(self):
@@ -50,7 +51,13 @@ class Scrapper:
          return st
 
      def highestRating(self):
-         return self.Highest_rating.text
+
+         vt = self.Highest_rating.text
+         ans=""
+         for i in vt:
+             if i>='0' and i<='9':
+                 ans+=i
+         return ans
 
      def contestAttended(self):
          cnt = 1
@@ -63,3 +70,4 @@ class Scrapper:
             list=[]
             for problems in self.lists_are:
                 list.append(problems.text)
+            return list
