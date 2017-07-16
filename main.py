@@ -4,8 +4,9 @@ import requests
 import urllib
 
 
-handle= input("Enter Handle ::  ")
+#handle= input("Enter Handle ::  ")
 try:
+    handle="atulmaster"
     request="https://www.codechef.com/users/"+handle
     r=requests.get(request)
     soup = BeautifulSoup(r.text,"html.parser")
@@ -14,19 +15,19 @@ try:
     rating=fin.find("div",{"class":"rating-number"})
     stars = fin.find("div",{"class":"rating-star"})
     res=rating.text
-    print("Your rank on Codechef :: "+res)
+    #print("Your rank on Codechef :: "+res)
     st=""
     for star in stars:
        st+=star.text
-    print("Your stars in codechef :: "+st)
+    #print("Your stars in codechef :: "+st)
     Highest_rating=fin.find("small")
-    print("Your "+Highest_rating.text)
+    #print("Your "+Highest_rating.text)
     allranks=ranks.findAll("li")
     Rank_list=[]
     for ran in allranks:
         Rank_list.append(ran.find("a").text)
-    print("Your Global Rank :: "+Rank_list[0])
-    print("Your Country Rank :: "+Rank_list[1])
+    #print("Your Global Rank :: "+Rank_list[0])
+    #print("Your Country Rank :: "+Rank_list[1])
     question_solved=soup.find("section",{"class":"rating-data-section problems-solved"})
     contest_Attended_List=question_solved.findAll("p")
     cnt=1
@@ -34,9 +35,9 @@ try:
         cnt=cnt+1
     solved_list=question_solved.find("span")
     lists_are=solved_list.findAll("a");
-    print("Practice Problems solved are ::  ")
-    for problems in lists_are:
-        print(problems.text)
-    print("Number of contest paricipated :: ",cnt)
+    #print("Practice Problems solved are ::  ")
+    #for problems in lists_are:
+        #print(problems.text)
+    #print("Number of contest paricipated :: ",cnt)
 except:
     print("Invalid Handle :( ")
