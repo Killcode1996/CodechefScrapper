@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import (QWidget,QApplication,QVBoxLayout,QPushButton,QLineEdit,QLabel,QHBoxLayout)
+from PyQt5.QtWidgets import (QWidget,QApplication,QVBoxLayout,QPushButton,QLineEdit,QLabel,QHBoxLayout,QComboBox)
 import scrapper
 
 class MainWindow(QWidget):
@@ -18,7 +18,6 @@ class MainWindow(QWidget):
         self.highestRating = QLabel("Highest Rating :: ")
         self.contestAttended = QLabel("Contest Attended :: ")
         self.button.clicked.connect(self.clickedButton)
-
         h = QHBoxLayout()
         h.addWidget(self.label)
         h.addWidget(self.name_input)
@@ -58,6 +57,7 @@ class MainWindow(QWidget):
             self.ratingStars.setText("Rating Stars ::   " + pri)
             self.highestRating.setText("Highest Rating ::   " + pri)
             self.contestAttended.setText("Contest Attended ::   " + pri)
+            #self.button.setText("Search")
        # print(main.cnt)
         #self.button.setText("your Rank is "+str(main.res))
 
