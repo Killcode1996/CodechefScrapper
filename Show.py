@@ -11,12 +11,13 @@ class MainWindow(QWidget):
         self.label = QLabel("Enter Handle ")
         self.name_input = QLineEdit()
         self.button = QPushButton("Search")
+        #self.rating = QLabel("Codechef Rating :: ")
         self.button.clicked.connect(self.clickedButton)
 
         h = QHBoxLayout()
         h.addWidget(self.label)
         h.addWidget(self.name_input)
-
+        #h.addWidget(self.rating)
         v = QVBoxLayout()
         v.addStretch(1)
         v.addLayout(h)
@@ -29,9 +30,13 @@ class MainWindow(QWidget):
         print("Entered")
         handle = self.name_input.text();
         print(handle)
-        s=scrapper.Scrapper(handle)
-        cnt=(s.ruu())
-        self.button.setText(cnt)
+        try:
+            s=scrapper.Scrapper(handle)
+            cnt=(s.overAllRating())
+            self.label.setText("Your Codechef Rating :: ")
+            self.button.setText(cnt)
+        except:
+            self.button.setText(":( Invalid Input")
        # print(main.cnt)
         #self.button.setText("your Rank is "+str(main.res))
 

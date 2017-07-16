@@ -8,42 +8,58 @@ class Scrapper:
 
      def __init__(self, handle):
          self.handl=handle
-     def ruu(self):
-        try:
-            print(self.handl)
-            request = "https://www.codechef.com/users/" + self.handl
-            r = requests.get(request)
-            soup = BeautifulSoup(r.text, "html.parser")
-            fin = soup.find("div", {"class": "rating-header"})
-            ranks = soup.find("div", {"class": "rating-ranks"})
-            rating = fin.find("div", {"class": "rating-number"})
-            stars = fin.find("div", {"class": "rating-star"})
-            res = rating.text
-            # print("Your rank on Codechef :: "+res)
-            st = ""
-            for star in stars:
-                st += star.text
-            # print("Your stars in codechef :: "+st)
-            Highest_rating = fin.find("small")
-            # print("Your "+Highest_rating.text)
-            allranks = ranks.findAll("li")
-            Rank_list = []
-            for ran in allranks:
-                Rank_list.append(ran.find("a").text)
-            # print("Your Global Rank :: "+Rank_list[0])
-            # print("Your Country Rank :: "+Rank_list[1])
-            question_solved = soup.find("section", {"class": "rating-data-section problems-solved"})
-            contest_Attended_List = question_solved.findAll("p")
-            cnt = 1
-            for items in contest_Attended_List:
-                cnt = cnt + 1
-            solved_list = question_solved.find("span")
-            lists_are = solved_list.findAll("a");
-            # print("Practice Problems solved are ::  ")
-            # for problems in lists_are:
-            # print(problems.text)
-            print("Number of contest paricipated :: ",cnt)
-            return res
-        except:
-            print("Invalid Handle :( ")
+         try:
 
+             request = "https://www.codechef.com/users/" + self.handl
+             r = requests.get(request)
+             self.soup = BeautifulSoup(r.text, "html.parser")
+             self.fin = self.soup.find("div", {"class": "rating-header"})
+             self.ranks = self.soup.find("div", {"class": "rating-ranks"})
+             self.rating = self.fin.find("div", {"class": "rating-number"})
+             self.stars = self.fin.find("div", {"class": "rating-star"})
+             self.question_solved = self.soup.find("section", {"class": "rating-data-section problems-solved"})
+             self.contest_Attended_List = self.question_solved.findAll("p")
+             self.solved_list = self.question_solved.find("span")
+             self.lists_are = self.solved_list.findAll("a");
+             self.allranks = self.ranks.findAll("li")
+             self.Highest_rating = self.fin.find("small")
+         except:
+             print("Invalid Input :( ")
+
+
+     def overAllRating(self):
+         res=self.rating.text
+         return res
+
+     def countryRank(self):
+         Rank_list = []
+         for ran in self.allranks:
+             Rank_list.append(ran.find("a").text)
+         return Rank_list[0]
+
+     def globalRank(self):
+         Rank_list = []
+         for ran in self.allranks:
+             Rank_list.append(ran.find("a").text)
+         return Rank_list[1]
+
+     def ratingStars(self):
+         st = ""
+         for star in self.stars:
+             st += star.text
+         return st
+
+     def highestRating(self):
+         return self.Highest_rating.text
+
+     def contestAttended(self):
+         cnt = 1
+         for items in self.contest_Attended_List:
+             cnt = cnt + 1
+         return cnt
+
+     def problemsolved(self):
+            print("Practice Problems solved are ::  ")
+            list=[]
+            for problems in self.lists_are:
+                list.append(problems.text)
